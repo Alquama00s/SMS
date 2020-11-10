@@ -3,5 +3,7 @@ A flutter app which uses encryption algorithms to send encrypted msgs over cellu
 ## Status
 * Fetching contacts complete
 * encryption algorithms complete
-* working on key management
+* key management complete
+* a file algorithms.dart is missing for app security
+* version 0.0.1 ready in release folder
 * Undocumented

@@ -17,6 +17,20 @@ import 'dart:typed_data';
   print('$key1 here');
 }
 */
+///decrypts msg
+String Decrypt(List<int> _bytedata,String _key){
+  final iv = IV.fromLength(16);
+  final key = Key.fromUtf8(_key);
+  final encrypter = Encrypter(AES(key));
+  Encrypted a = Encrypted(Uint8List.fromList(_bytedata));
+  try {
+    final decrypted = encrypter.decrypt(a, iv: iv);
+    return decrypted;
+  } catch (_) {
+    print('some error');
+    return 'some error';
+  }
+}
 ///encrypts msg
 List<int> Encrypt(String msg,String key){
   final pass = Key.fromUtf8(key);

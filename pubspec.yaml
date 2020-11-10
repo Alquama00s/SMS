@@ -38,6 +38,7 @@ dev_dependencies:
   flutter_sms: 2.1.1
   permission_handler: 5.0.1+1
   contacts_service: 0.4.6
+  url_launcher: 5.7.10
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

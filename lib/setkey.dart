@@ -73,6 +73,11 @@ class _SetkeyState extends State<Setkey>{
               },
                 child: Text('Set key'),
               ),
+              RaisedButton(onPressed: ()async=>{
+                Scaffold.of(context).showSnackBar(SnackBar(content: Text(await saveKey()))),
+              },
+                child: Text('Save key'),
+              ),
             ],
           ),
           ),

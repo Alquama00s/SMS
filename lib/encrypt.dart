@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:secret_messeging_service/commonfunctions.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'widgetLib.dart';
 import 'getContacts.dart';
 import 'setkey.dart';
@@ -73,7 +74,7 @@ class _EncryptState extends State<Encrypt>{
               ),
               RaisedButton(onPressed: ()async=>{
                 _enmsg=await encrypt(msg,selfnumber),
-                print(_enmsg),
+                  await launch('sms:${number}?body=${_enmsg.replaceAll(' ', '%20')}'),
               },
                 child: Text('Send'),
               ),
