@@ -8,7 +8,7 @@
 .buildlog/
 .history
 .svn/
-*algorithms.dart
+/lib/algorithms.dart
 # IntelliJ related
 *.iml
 *.ipr
