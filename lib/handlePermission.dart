@@ -18,7 +18,7 @@ class Handle extends StatelessWidget {
           //print(snap.data);
           if (snap.data[Permission.contacts] == PermissionStatus.granted &&
               snap.data[Permission.storage] == PermissionStatus.granted) {
-            return MainScreen();
+            return Intro();
           } else {
             if (snap.data[Permission.contacts] != PermissionStatus.granted)
               Permission.contacts.request();
