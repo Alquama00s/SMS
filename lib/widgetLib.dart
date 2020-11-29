@@ -1,16 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'handlePermission.dart';
+import 'intro.dart';
+
 class Field extends StatelessWidget {
-  final String hint,label;
+  final String hint, label;
   final bool active;
   final TextInputType type;
   final execute;
-  Field(this.type,this.hint,this.label,this.active,this.execute);
+
+  Field(this.type, this.hint, this.label, this.active, this.execute);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      //height: 60,
+        //height: 60,
         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
         decoration: BoxDecoration(
           //color: Colors.grey[350],

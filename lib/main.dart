@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'handlePermission.dart';
-void main(){
+import 'graphics.dart';
+
+void main() {
   runApp(Main());
 }
-class Main extends StatelessWidget{
+
+class Main extends StatelessWidget {
   DateTime now = new DateTime.now();
-  final Expire=DateTime(2020, 12, 31);
+  final Expire = DateTime(2020, 12, 31);
+
   @override
   Widget build(BuildContext context) {
-    if(Expire.difference(now).inDays>=0){
+    if (Expire.difference(now).inDays >= 0) {
       return MaterialApp(
-          home: Intro(),
+        home: Handle(),
       );
     }else{
       return MaterialApp(
@@ -63,6 +67,23 @@ class Error extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+///test
+class Test extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF2a3950),
+      body: Container(
+        height: MediaQuery
+            .of(context)
+            .size
+            .height * 0.25,
+        child: CurvedBar(),
       ),
     );
   }
