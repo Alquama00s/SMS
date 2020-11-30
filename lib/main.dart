@@ -15,6 +15,13 @@ class Main extends StatelessWidget {
     if (Expire.difference(now).inDays >= 0) {
       return MaterialApp(
         home: Handle(),
+        theme: ThemeData(
+            primaryColor: Color(0xFF2a3950),
+            fontFamily: 'Breeserif',
+            inputDecorationTheme: const InputDecorationTheme(
+              labelStyle: TextStyle(color: Colors.white),
+              hintStyle: TextStyle(color: Colors.white),
+            )),
       );
     }else{
       return MaterialApp(
