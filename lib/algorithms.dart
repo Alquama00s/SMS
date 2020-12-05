@@ -27,7 +27,7 @@ String Decrypt(List<int> _bytedata,String _key){
     final decrypted = encrypter.decrypt(a, iv: iv);
     return decrypted;
   } catch (_) {
-    print('some error');
+    print(_);
     return 'some error';
   }
 }
@@ -42,13 +42,13 @@ List<int> Encrypt(String msg,String key){
 }
 ///gives a unique 16 digit key for a phone no
 String dllKey(String num) {
-  num = num.split('').reversed.join().substring(0, 10);
   final key = Key.fromUtf8('my 32 length key................');
   final iv = IV.fromLength(8);
   final encrypter = Encrypter(Salsa20(key));
   final dllKey = encrypter.encrypt(num, iv: iv);
   String _finalKey = dllKey.base64.toString();
   _finalKey = _finalKey + _finalKey;
+  _finalKey=_finalKey.substring(0,32);
   return _finalKey;
 }
 

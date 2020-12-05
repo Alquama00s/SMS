@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'intro.dart';
 import 'widgetLib.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'mainScreen1.dart';
+import 'mainScreen.dart';
 
 class Handle extends StatelessWidget {
   @override

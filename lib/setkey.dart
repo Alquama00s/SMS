@@ -60,7 +60,7 @@ class _SetkeyState extends State<Setkey>{
                   },
                 ),
               ),
-              Field(TextInputType.number,num, 'number', true, (v){num=v;}),
+              //Field(TextInputType.number,num, 'number', true, (v){num=v;}),
               RaisedButton(onPressed: ()=>{
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context)=>ContactLoader(save))

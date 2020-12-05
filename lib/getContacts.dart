@@ -1,9 +1,8 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:secret_messeging_service/encrypt.dart';
+import 'Global.dart';
 import 'widgetLib.dart';
-import 'encrypt.dart';
 ///individual contact
 class Contact_ extends StatelessWidget {
   final Contact view;
@@ -24,11 +23,15 @@ class Contact_ extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             width: 5,
-            color: Colors.white,
+            color: BaseColor,
           ),
-          color: Colors.blue,
+          color: SecColor,
         ),
-        child: Text(view.displayName),
+        child: Text(view.displayName,
+        style: TextStyle(
+          color: Colors.white,
+        ),
+        ),
       ),
     );
   }
@@ -55,11 +58,15 @@ class Number_ extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             width: 5,
-            color: Colors.white,
+            color: BaseColor,
           ),
-          color: Colors.blue,
+          color: SecColor,
         ),
-        child: Text(view.value),
+        child: Text(view.value,
+        style: TextStyle(
+          color: Colors.white
+        ),
+        ),
       ),
     );
   }
@@ -73,6 +80,7 @@ class Numbers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: BaseColor,
       body: ListView.builder(
       itemCount:list.length,
       itemBuilder: (context, i) {
@@ -107,13 +115,38 @@ class _ContactLoaderState extends State<ContactLoader> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: BaseColor,
       body: Container(
         padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
         width: MediaQuery.of(context).size.width,
         child:SingleChildScrollView(
           child: Column(
             children: [
-              Field(TextInputType.text, 'Search', 'Search', true, (value){search=value;setLoad();}),
+              Container(
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                color: BaseColor,
+                child: TextFormField(
+                  //controller: controller==null?TextEditingController():controller,
+                  keyboardType: TextInputType.text,
+                  maxLines: 1,
+                  cursorColor: Colors.white,
+                  onChanged:(value)=>{search=value,setLoad(),},
+                  style: TextStyle(fontSize: 20,
+                      color: Colors.white
+                  ),
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    border: InputBorder.none,
+                    //labelText: hint[0].toUpperCase()+hint.substring(1),
+                  ),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+              ),
               SizedBox(height: 10,),
               Container(
                 height: MediaQuery.of(context).size.height-110,

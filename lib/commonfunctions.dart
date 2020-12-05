@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'algorithms.dart';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
+import 'Global.dart';
 ///sets the key
 Future<String> setKey(String keypass,String num)async{
   String status;
@@ -106,23 +107,45 @@ Future<String> getKey(String num)async{
   return keypass;
 }
 ///encrypt msg
-Future<String> encrypt(String msg,String num)async{
-  String key=await getKey(num);
-  print(key);
+Future<String> encrypt(String msg,String num,{String type='Default'})async{
+  String key;
+  print('Cycle ... encrption');
+  if(type=='Default'){
+    num=num+GUserMap['number'];
+    print(num+'encrypt');
+    key=dllKey(num);
+    print(key+' encrypt');
+  }else {
+    key = await getKey(num);
+  }
   String res;
   if(key!=null){
     List<int> _bytedata=Encrypt(msg,key);
+    print(_bytedata);
     res=writeEncrypted(_bytedata);
   }
+  print(GUserMap);
   return res;
 }
 ///decrypt msg
-Future<String> decrypt(String _enenkey,String enmsg,String num)async{
+Future<String> decrypt(String _enenkey,String enmsg,String num,{String type='Default'})async{
   //String _enenkey=await selectKey();
-  List<int> _keybyte=readEncryptedkey(_enenkey);
-  String keyPass=retrievePass(_keybyte, num);
+  print('Cycle ... decryption');
+  String keyPass;
+  if(type=='Default'){
+    num=GUserMap['number']+num;
+    print(num+'decrypt');
+    keyPass=dllKey(num);
+    print(keyPass+' decrypt');
+  }else{
+    List<int> _keybyte=readEncryptedkey(_enenkey);
+    keyPass=retrievePass(_keybyte, num);
+  }
+  print(enmsg);
   List<int> _msgbyte=readEncrypted(enmsg);
+  print(_msgbyte);
   String fmsg=Decrypt(_msgbyte, keyPass);
+  print(fmsg);
   return fmsg;
 }
 ///licenses
@@ -136,4 +159,38 @@ void License(context){
         'Please give your valuable feedback to the developer.',
 
   );
+}
+///check for user initiation
+Future<bool> checkUser()async{
+  Map<String,dynamic> UserMap;
+  final dir = await getApplicationDocumentsDirectory();
+  final path = '${dir.path}/User.json';
+  File User=new File(path);
+  if(User.existsSync()){
+    UserMap=json.decode(await User.readAsString());
+  }else{
+    await User.create(recursive: true);
+  }
+  try {
+    if (UserMap['number'].length >= 10){
+      GUserMap=UserMap;
+      return true;
+    }
+    else
+      return false;
+  }catch(_){
+    return false;
+  }
+}
+///write user initiation
+Future<void> writeUser(Map<String,dynamic> UserMap)async{
+  final dir = await getApplicationDocumentsDirectory();
+  final path = '${dir.path}/User.json';
+  File User=new File(path);
+  if(User.existsSync()){
+    User.writeAsString(json.encode(UserMap));
+  }else{
+    await User.create(recursive: true);
+  }
+  await User.writeAsString(json.encode(UserMap));
 }
