@@ -1,21 +1,10 @@
-# SMS
-A flutter app which uses encryption algorithms to send encrypted msgs over cellular connection (not internet)
-## Status
-* Fetching contacts complete
-* encryption algorithms complete
-* key management complete
-* version 0.0.1 ready in release folder
-* working on ui/ux
-* Undocumented
+# Dots & Dashes
+Ever faced security concerns while sending a personal message like maybe a pin. No worries we got u covered Dots and dashes encrypts your secret using AES algorithm which by the way is most trusted encryption algorithm as of now.<br/><br/>
+[![version](https://img.shields.io/badge/Version-1.0.0-blue)]
 ## How to use 
 ### Encryption
-* create a key with a string(the key itself) and you phone number
-* save the key. (you need to later send it to the receiver) 
-* Enter your number messege and then select the reciepent
-* send the encoded dots and dashes.
-* send the key file also saved earlier
+Just enter your message then enter the phone number of the intended receiver and encrypt your message into bunch of Dots & dashes.<br/><br/>
+Send these dots and dashes to the receiver... No no they are no morse code and no computer can decrypt it except the intended user.<br/><br/>
 ### Decryption
-* select the key file send by the sender.
-* select the senders number correctly.
-* copy the encrypted dots and dashes.
-* click on decode
+Then while decrypting just paste those Dots & dashes then select the senders number and decrypt!'<br/><br/>
+
