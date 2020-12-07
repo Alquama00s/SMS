@@ -246,12 +246,14 @@ class _DecryptState extends State<Decrypt> {
               ),
             ),
             onTap: ()async=>{
-              temp=await decrypt('',msg,number),
-              print(temp),
-              setState((){
-                msgController.clear();
-                msg=temp;
-              }),
+              if(msg!=''&& number!=''){
+                temp=await decrypt('',msg,number),
+                print(temp),
+                setState((){
+                  msgController.clear();
+                  msg=temp;
+                }),
+              }
             },
           ),
         ],

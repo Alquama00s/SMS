@@ -4,6 +4,7 @@ import 'package:secret_messeging_service/Global.dart';
 import 'mainScreen.dart';
 import 'graphics.dart';
 import 'Global.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -13,7 +14,7 @@ class Intro extends StatefulWidget {
 }
 
 class _IntroState extends State<Intro> {
-  var _animbeg = 0.0, _animend = -700.0, disp = true;
+  var _animbeg = 0.0, _animend = -700.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,8 +22,7 @@ class _IntroState extends State<Intro> {
       body: Container(
         child: Stack(
           children: [
-            disp
-                ? Column(children: [
+            Column(children: [
                     Expanded(
                       child: SingleChildScrollView(
                         padding: EdgeInsets.fromLTRB(0, 250, 0, 10),
@@ -30,17 +30,30 @@ class _IntroState extends State<Intro> {
                           padding: EdgeInsets.all(30),
                           width: MediaQuery.of(context).size.width,
                           child: Text(
-                            'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-                            style: TextStyle(
+                            'Ever faced security concerns while sending a personal '
+                                'message like maybe a pin \n'
+                                'No worries we got u covered Dots and dashes encrypts your '
+                                'secret using AES'
+                                ' algorithm which by the way is most trusted encryption algorithm'
+                                ' as of now.\n\n'
+                                'Just enter your message then enter the phone number of the intended'
+                                ' receiver and encrypt your message into bunch of Dots & dashes.\n\n'
+                                ' Send these dots and dashes to the receiver... No no they are no morse '
+                                ' code and no computer can decrypt it except the intended user.\n\n'
+                                ' Then while decrypting just paste those Dots & dashes then select'
+                                ' the senders number and decrypt!\n\n'
+                                ' The pair of phone number (your\'s and the receiver\'s)'
+                                ' are used to generate unique key with which your secret is encrypted.\n\n'
+                                'Tap the icon to go to project\'s github page',
+                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 40,
+                              fontSize: 25,
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ])
-                : Container(),
+                  ]),
             TweenAnimationBuilder(
               tween: Tween(begin: _animbeg, end: _animend),
               duration: Duration(seconds: 1),
@@ -52,8 +65,7 @@ class _IntroState extends State<Intro> {
                       top: value,
                       child: CurvedBar(),
                     ),
-                    disp
-                        ? Positioned(
+                     Positioned(
                             top: (value >
                                     -MediaQuery.of(context).size.height * 0.4)
                                 ? (MediaQuery.of(context).size.height / 2 +
@@ -61,19 +73,12 @@ class _IntroState extends State<Intro> {
                                 : (MediaQuery.of(context).size.height / 2 -
                                     MediaQuery.of(context).size.height * 0.4),
                             left: (MediaQuery.of(context).size.width / 2 - 50),
-                            child: MainIcon(),
-                          )
-                        : Container(),
+                            child: GestureDetector(child: MainIcon(),
+                            onTap: () => launch('https://github.com/Alquama00s/SMS'),
+                            ),
+                          ),
                   ],
                 );
-              },
-              onEnd: () {
-                if (disp == false) {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => Launcher()),
-                      (Route<dynamic> route) => false);
-                }
               },
             ),
           ],
@@ -86,9 +91,10 @@ class _IntroState extends State<Intro> {
         backgroundColor: SecColor,
         onPressed: () {
           setState(() {
-            disp = false;
-            _animbeg = -700.0;
-            _animend = -MediaQuery.of(context).size.height*0.77;
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => Launcher()),
+                    (Route<dynamic> route) => false);
           });
         },
       ),

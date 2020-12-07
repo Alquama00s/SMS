@@ -90,7 +90,28 @@ class _ShowinfoState extends State<Showinfo> {
                 ),
       ],
             ),
-            SizedBox(height: 80,),
+            SizedBox(height: 10,),
+            FutureBuilder(
+              future: readUser(),
+              builder: (context,snap){
+                if(snap.connectionState==ConnectionState.done){
+                  if(snap!=''){
+                    return Container(
+                      width: MediaQuery.of(context).size.width-50,
+                      child: Text(
+                        'Current number: ${snap.data}\n',
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: DeepBase,
+                        ),
+                      ),
+                    );
+                  }
+                }
+                return Container();
+              },
+            ),
+            SizedBox(height: 40,),
             MediaQuery.of(context).viewInsets.bottom==0?
             Container(
               width: MediaQuery.of(context).size.width-50,
@@ -101,7 +122,7 @@ class _ShowinfoState extends State<Showinfo> {
                     ' You and the receiver is created automatically.',
                 style: TextStyle(
                   fontSize: 30,
-                  color: Color(0xFF1a2432),
+                  color: DeepBase,
                 ),
               ),
             ):Container(),
@@ -110,17 +131,23 @@ class _ShowinfoState extends State<Showinfo> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(
-          Icons.navigate_next,
+          Icons.update,
           color: Colors.white,
         ),
         backgroundColor:SecColor ,
         onPressed: ()=>{
-          num=num.replaceAll(new RegExp(r"\s+"), "").split('').reversed.join().substring(0,10)
-              .split('').reversed.join(),
-          writeUser({'number':num}),
-          Navigator.pushAndRemoveUntil(context,
-              MaterialPageRoute(builder: (context)=>Launcher()), (route) => false)
-        },
+          if(num.length>=10){
+            num=num.replaceAll(new RegExp(r"\s+"), "").split('').reversed.join().substring(0,10)
+                .split('').reversed.join(),
+            writeUser({'number':num}),
+            Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(builder: (context)=>Launcher()), (route) => false)
+          }else{
+            setState((){
+       name='Invalid number !';
+    }),
+          }
+          },
       ),
     );
   }

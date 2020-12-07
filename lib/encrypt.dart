@@ -174,15 +174,18 @@ class _EncryptState extends State<Encrypt> {
               ),
             ),
             onTap: ()async=>{
-              temp=await encrypt(msg, number),
-              setState((){
-                msgController.clear();
-                msg=temp;
-                Clipboard.setData(new ClipboardData(text: msg));
+              if(msg!=''&& number.length>=10){
+                print(number),
+                temp=await encrypt(msg, number),
+                setState((){
+                  msgController.clear();
+                  msg=temp;
+                  Clipboard.setData(new ClipboardData(text: msg));
 
-              }),
+                }),
 
-    Scaffold.of(context).showSnackBar(snackBar),
+                Scaffold.of(context).showSnackBar(snackBar),
+              }
             },
           ),
         ],

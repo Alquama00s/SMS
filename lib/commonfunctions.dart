@@ -5,6 +5,8 @@ import 'dart:io';
 import 'algorithms.dart';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'Global.dart';
+import 'graphics.dart';
+import 'intro.dart';
 ///sets the key
 Future<String> setKey(String keypass,String num)async{
   String status;
@@ -152,12 +154,25 @@ Future<String> decrypt(String _enenkey,String enmsg,String num,{String type='Def
 void License(context){
   showAboutDialog(context: context,
     applicationName: 'Dots and Dashes',
-    applicationVersion: 'Version: 0.0.1',
+    applicationVersion: 'Version: 1.0.0',
     applicationLegalese:'The project is open source\n'
         'Available at: https://github.com/Alquama00s/SMS\n'
-        'This version of app is only for testing and will therefore be eventually deprecated.\n'
+        'Some features of the app are currently on development\n'
         'Please give your valuable feedback to the developer.',
-
+    applicationIcon: MainIcon(size: 50),
+    children: [
+      RaisedButton(
+          child: Text('Confused how to use ?',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          color: BaseColor,
+          onPressed: (){
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Intro()), (route) => false);
+          }
+          ),
+    ],
   );
 }
 ///check for user initiation
@@ -193,4 +208,19 @@ Future<void> writeUser(Map<String,dynamic> UserMap)async{
     await User.create(recursive: true);
   }
   await User.writeAsString(json.encode(UserMap));
+}
+///read user initiation
+Future<String> readUser()async{
+  String res='';
+  Map<String,dynamic> UserMap;
+  final dir = await getApplicationDocumentsDirectory();
+  final path = '${dir.path}/User.json';
+  File User=new File(path);
+  if(User.existsSync()){
+    UserMap=json.decode(await User.readAsString());
+  }else{
+    await User.create(recursive: true);
+  }
+  GUserMap=UserMap;
+  return UserMap['number'];
 }

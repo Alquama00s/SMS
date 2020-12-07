@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:secret_messeging_service/Global.dart';
 import 'handlePermission.dart';
 import 'graphics.dart';
-
+import 'widgetLib.dart';
 void main() {
   runApp(Main());
 }
@@ -16,7 +17,8 @@ class Main extends StatelessWidget {
       return MaterialApp(
         home: Handle(),
         theme: ThemeData(
-            primaryColor: Color(0xFF2a3950),
+            primaryColor: BaseColor,
+            accentColor: SecColor,
             fontFamily: 'Breeserif',
             inputDecorationTheme: const InputDecorationTheme(
               labelStyle: TextStyle(color: Colors.white),
@@ -25,73 +27,17 @@ class Main extends StatelessWidget {
       );
     }else{
       return MaterialApp(
-        home: Error('This version of app is expired\n'
-            'head to https://github.com/Alquama00s/SMS/release \nfor a newer version'),
+        home: Error('This version of app is expired'),
       );
     }
   }
 }
-///error page
-class Error extends StatelessWidget {
-  final String data;
-  Error(this.data);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.error_outline,
-              color: Colors.red,
-              size: 100,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Text(
-                'Error',
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 150,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Text(
-                data,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.red,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 ///test
 class Test extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFF2a3950),
-      body: Container(
-        height: MediaQuery
-            .of(context)
-            .size
-            .height * 0.25,
-        child: CurvedBar(),
-      ),
+    return MaterialApp(
+      home:Error('hllo'),
     );
   }
 }
