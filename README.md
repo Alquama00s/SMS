@@ -11,4 +11,4 @@ Send these dots and dashes to the receiver... No no they are no morse code and n
 ### Decryption
 Then while decrypting just paste those Dots & dashes then select the senders number and decrypt!'<br/><br/>
 ### Screenshots
-<img src='./screens/pic.png'>
+<img src='./screens/pic.png' width='250'>
