@@ -13,7 +13,7 @@ class Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Expire.difference(now).inDays >= 0) {
+    //if (Expire.difference(now).inDays >= 0) {
       return MaterialApp(
         home: Handle(),
         theme: ThemeData(
@@ -25,11 +25,11 @@ class Main extends StatelessWidget {
               hintStyle: TextStyle(color: Colors.white),
             )),
       );
-    }else{
+    /*}else{
       return MaterialApp(
         home: Error('This version of app is expired'),
       );
-    }
+    }*/
   }
 }
 ///test
